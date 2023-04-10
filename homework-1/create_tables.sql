@@ -11,7 +11,7 @@ CREATE TABLE employees
 
 CREATE TABLE customers
 (
-	customer_id int PRIMARY KEY,
+	customer_id char(5) PRIMARY KEY,
 	company_name varchar(200) NOT NULL,
 	contact_name text
 )
@@ -19,8 +19,8 @@ CREATE TABLE customers
 CREATE TABLE orders
 (
 	order_id int PRIMARY KEY,
-	customer_id int UNIQUE REFERENCES customers(customer_id),
-	employee_id int UNIQUE REFERENCES employees(employee_id),
+	customer_id char(5) REFERENCES customers(customer_id),
+	employee_id int REFERENCES employees(employee_id),
 	order_date varchar(10) NOT NULL,
 	ship_city varchar(100) NOT NULL
 )
