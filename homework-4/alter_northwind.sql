@@ -20,9 +20,11 @@ SELECT * INTO discontinued_products FROM products WHERE discontinued = 1
 ALTER TABLE products DROP CONSTRAINT fk_products_categories;
 ALTER TABLE products DROP CONSTRAINT fk_products_suppliers;
 ALTER TABLE order_details DROP CONSTRAINT fk_order_details_products;
+
 DELETE FROM products WHERE discontinued = 1;
-ALTER TABLE products ADD CONSTRAINT fk_products_categories FOREIGN KEY(category_id) REFERENCES categories(category_id);
 DELETE FROM order_details WHERE product_id NOT IN (SELECT product_id FROM products);
 DELETE FROM orders WHERE order_id NOT IN (SELECT order_id FROM order_details);
+
+ALTER TABLE products ADD CONSTRAINT fk_products_categories FOREIGN KEY(category_id) REFERENCES categories(category_id);
 ALTER TABLE products ADD CONSTRAINT fk_products_suppliers FOREIGN KEY(supplier_id) REFERENCES suppliers(supplier_id);
 ALTER TABLE order_details ADD CONSTRAINT fk_order_details_products FOREIGN KEY(product_id) REFERENCES products(product_id);
